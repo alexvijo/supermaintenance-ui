@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../models/hero.model';
 import { HeroService } from '../services/hero.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { HeroFormComponent } from '../hero-form/hero-form.component';
 
 @Component({
   selector: 'app-heroes',
@@ -13,7 +15,10 @@ export class HeroesComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'actions'];
   dataSource: MatTableDataSource<Hero> = new MatTableDataSource<Hero>();
 
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private heroService: HeroService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getHeroes();
@@ -30,18 +35,39 @@ export class HeroesComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  editHero(event: Event) {
-    const hero = (event.target as HTMLInputElement).value;
-    console.log(hero);
+  editHero(hero: Hero) {
+    this.openDialog(hero);
   }
 
-  deleteHero(event: Event) {
-    const hero = (event.target as HTMLInputElement).value;
-    console.log(hero);
+  deleteHero(hero: Hero) {
+    this.heroService.deleteHero(hero.id).subscribe(() => {
+      this.getHeroes();
+    });
   }
 
-  addHero(event: Event) {
-    const hero = (event.target as HTMLInputElement).value;
-    console.log(hero);
+  addHero() {
+    this.openDialog(null);
+    /*this.heroService.createHero(hero).subscribe(() => {
+      this.getHeroes();
+    });*/
+  }
+
+  openDialog(hero: Hero | null): void {
+    console.log("hero en openDialog: ", hero);
+
+    const dialogRef = this.dialog.open(HeroFormComponent, {
+      width: '600px',
+      data: {
+        hero: hero
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed',result);
+      // this.dialogRef.close();
+      // you can use the result here
+    });
+
+  
   }
 }

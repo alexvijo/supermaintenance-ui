@@ -28,6 +28,15 @@ docker-compose up
 [Abrir navegador](http://localhost:8080/)
 
 
+### Correr Tests
+Para correr los tests:
+1. Ejecuta el comando
+```bash
+ng test
+```
+2. Abre en el navegador
+
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.

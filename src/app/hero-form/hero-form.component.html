@@ -1,0 +1,33 @@
+<mat-dialog-content class="container">
+  <h1 mat-dialog-title>Nuevo héroe</h1>
+  <form [formGroup]="heroForm" (ngSubmit)="saveHero()" fxLayout="column" fxLayoutAlign="start stretch">
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Alias</mat-label>
+      <input matInput type="text" formControlName="name">
+      <mat-error *ngIf="heroForm.get('name'); let nameCtrl">
+        <!-- Show different error messages for different errors -->
+        <div *ngIf="nameCtrl.invalid && nameCtrl.touched">
+          <div *ngIf="nameCtrl.errors && nameCtrl.errors['required']">El nombre es obligatorio.</div>
+          <div *ngIf="nameCtrl.errors && nameCtrl.errors['minlength']">El nombre debe tener al menos 2 caracteres.</div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="heroForm.get('description'); let descCtrl">
+        <!-- Show different error messages for different errors -->
+        <div *ngIf="descCtrl.invalid && descCtrl.touched">
+          <div *ngIf="descCtrl.errors && descCtrl.errors['required']">La descripción es obligatoria.</div>
+          <div *ngIf="descCtrl.errors && descCtrl.errors['minlength']">La descripción debe tener al menos 10 caracteres.</div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" type="submit">Guardar</button>
+</mat-dialog-actions>
