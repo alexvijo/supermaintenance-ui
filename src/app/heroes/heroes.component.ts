@@ -47,14 +47,9 @@ export class HeroesComponent implements OnInit {
 
   addHero() {
     this.openDialog(null);
-    /*this.heroService.createHero(hero).subscribe(() => {
-      this.getHeroes();
-    });*/
   }
 
   openDialog(hero: Hero | null): void {
-    console.log("hero en openDialog: ", hero);
-
     const dialogRef = this.dialog.open(HeroFormComponent, {
       width: '600px',
       data: {
@@ -64,10 +59,7 @@ export class HeroesComponent implements OnInit {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed',result);
-      // this.dialogRef.close();
-      // you can use the result here
+      this.getHeroes();
     });
-
-  
   }
 }

@@ -1,23 +1,26 @@
 <div style="display: flex; justify-content: space-between; align-items: center;">
 
     <mat-form-field appearance="fill">
-        <input matInput (keyup)="applyFilter($event)" placeholder="Superman">
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar">
     </mat-form-field>
-      
-    <button mat-raised-button color="primary" title="Añadir superheroe" (click)="addHero()">
-        Añadir Heroe
-    </button>
+
+    <div class="add-hero-button">
+        <button mat-raised-button color="primary" title="Añadir superheroe" (click)="addHero()">
+            Añadir Heroe
+        </button>
+    </div>
+
 </div>
   
 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <!-- Column definitions -->
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <th mat-header-cell *matHeaderCellDef> Alias </th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <th mat-header-cell *matHeaderCellDef> Descripción </th>
         <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 

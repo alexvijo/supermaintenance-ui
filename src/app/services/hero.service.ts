@@ -29,8 +29,8 @@ export class HeroService {
     return this.http.get<Hero[]>(`${this.apiUrl}?name_like=${searchTerm}`);
   }
 
-  updateHero(heroToUpdate: Hero): Observable<Hero> {
-    return this.http.put<Hero>(`${this.apiUrl}/${heroToUpdate.id}`, heroToUpdate);
+  updateHero(id: number, heroToUpdate: Hero): Observable<Hero> {
+    return this.http.put<Hero>(`${this.apiUrl}/${id}`, heroToUpdate);
   }
 
   deleteHero(id: number): Observable<void> {

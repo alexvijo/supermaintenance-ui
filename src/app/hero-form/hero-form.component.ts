@@ -3,6 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Hero } from '../models/hero.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
+import { HeroService } from '../services/hero.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { LoadingService } from '../services/loading-service.service';
 
 @Component({
   selector: 'app-hero-form',
@@ -13,8 +16,17 @@ export class HeroFormComponent implements OnInit{
 
   @Input() hero: Hero | null = null;
   heroForm!: FormGroup;
+  heroService: HeroService;
+  loadingService: LoadingService;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    heroService: HeroService,
+    public dialogRef: MatDialogRef<HeroFormComponent>,
+    loadingService: LoadingService
+  ) {
+    this.heroService = heroService;
+    this.loadingService = loadingService;
     if (data) {
       this.hero = data.hero;
     }
@@ -40,9 +52,23 @@ export class HeroFormComponent implements OnInit{
 
   saveHero() {
     if (this.hero) {
-      // edit the hero
+      console.log("1 saveHero: ",this.hero.id,  this.heroForm.value);
+      this.loadingService.setLoading(true);
+      this.heroService.updateHero(this.hero.id, this.heroForm.value).subscribe(response => {
+        // add timeout to see the spinner
+        setTimeout(() => {
+          this.loadingService.setLoading(false);
+          this.dialogRef.close(response);
+        }, 1500);
+      });
     } else {
-      // create a new hero
+      console.log("2 saveHero: ", this.heroForm.value);
+      this.heroService.createHero(this.heroForm.value).subscribe(response => {
+        setTimeout(() => {
+          this.loadingService.setLoading(false);
+          this.dialogRef.close(response);
+        },1500);
+      });
     }
   }
 }
