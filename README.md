@@ -8,6 +8,16 @@ angular CLI: 16.2.12
 node: v18.19.1
 npm: v10.2.4
 
+### Correr la aplicación localmente
+Para correr la aplicación en localhost, sigue estos pasos:
+1. Ejecuta angular server con
+```bash
+npm start
+```
+2. Abrir un browser en localhost sobre el puerto 4200
+[Abrir navegador](http://localhost:4200/)
+
+
 ### Correr Docker
 Para correr la aplicación sobre docker, sigue estos pasos:
 1. Ejecuta docker-compose
