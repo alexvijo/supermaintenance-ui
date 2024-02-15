@@ -1,0 +1,24 @@
+{
+    "heroes": [
+      { "id": 1, "name": "Spiderman", "description": "A hero with spider-like abilities." },
+      { "id": 2, "name": "Superman", "description": "The Man of Steel from Krypton." },
+      { "id": 3, "name": "Wonder Woman", "description": "Amazonian princess with superhuman abilities." },
+      { "id": 4, "name": "Batman", "description": "The Dark Knight of Gotham City." },
+      { "id": 5, "name": "Flash", "description": "The fastest man alive." },
+      { "id": 6, "name": "Aquaman", "description": "The king of the underwater kingdom of Atlantis." },
+      { "id": 7, "name": "Green Lantern", "description": "A member of the intergalactic police force." },
+      { "id": 8, "name": "Thor", "description": "The Norse god of thunder." },
+      { "id": 9, "name": "Hulk", "description": "A scientist transformed into a monster with immense strength." },
+      { "id": 10, "name": "Black Widow", "description": "A highly skilled spy." },
+      { "id": 11, "name": "Iron Man", "description": "A billionaire inventor in armored suits." },
+      { "id": 12, "name": "Captain America", "description": "A super-soldier fighting for freedom." },
+      { "id": 13, "name": "Hawkeye", "description": "A master archer." },
+      { "id": 14, "name": "Black Panther", "description": "The king of Wakanda with enhanced abilities." },
+      { "id": 15, "name": "Doctor Strange", "description": "The Sorcerer Supreme." },
+      { "id": 16, "name": "Ant-Man", "description": "A hero with the ability to shrink in scale." },
+      { "id": 17, "name": "Wolverine", "description": "A mutant with healing power and retractable claws." },
+      { "id": 18, "name": "Deadpool", "description": "A mercenary with a regenerative healing factor." },
+      { "id": 19, "name": "Captain Marvel", "description": "A former U.S. Air Force pilot with superhuman strength." },
+      { "id": 20, "name": "Silver Surfer", "description": "A powerful being who can travel through space." }
+    ]
+  }
