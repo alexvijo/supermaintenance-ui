@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Hero } from '../models/hero.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,35 +9,31 @@ import { Hero } from '../models/hero.model';
 export class HeroService {
 
   private heroes: Hero[] = [];
+  private apiUrl = 'http://localhost:3000/heroes';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getAllHeroes(): Hero[] {
-    return this.heroes;
+  getAllHeroes(): Observable<Hero[]> {
+    return this.http.get<Hero[]>(this.apiUrl);
   }
 
-  createHero(newHero: Hero): void {
-    const nextId = this.heroes.length > 0 ? Math.max(...this.heroes.map(hero => hero.id)) + 1 : 1;
-    newHero.id = nextId;
-    this.heroes.push(newHero);
+  createHero(newHero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.apiUrl, newHero);
   }
 
-  getHeroById(id: number): Hero | undefined {
-    return this.heroes.find(hero => hero.id === id);
+  getHeroById(id: number): Observable<Hero> {
+    return this.http.get<Hero>(`${this.apiUrl}/${id}`);
   }
 
-  searchHeroesByName(searchTerm: string): Hero[] {
-    return this.heroes.filter(hero => hero.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  searchHeroesByName(searchTerm: string): Observable<Hero[]> {
+    return this.http.get<Hero[]>(`${this.apiUrl}?name_like=${searchTerm}`);
   }
 
-  updateHero(heroToUpdate: Hero): void {
-    const index = this.heroes.findIndex(hero => hero.id === heroToUpdate.id);
-    if (index !== -1) {
-      this.heroes[index] = heroToUpdate;
-    }
+  updateHero(heroToUpdate: Hero): Observable<Hero> {
+    return this.http.put<Hero>(`${this.apiUrl}/${heroToUpdate.id}`, heroToUpdate);
   }
 
-  deleteHero(id: number): void {
-    this.heroes = this.heroes.filter(hero => hero.id !== id);
+  deleteHero(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
