@@ -22,6 +22,7 @@ import { LoadingSpinnerComponent } from './loading-spinner-component/loading-spi
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { UpperCaseDirective } from './upper-case.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoadingInterceptor } from './loading.interceptor';
     HeroesComponent,
     HeroFormComponent,
     LoadingSpinnerComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    UpperCaseDirective
   ],
   imports: [
     BrowserModule,

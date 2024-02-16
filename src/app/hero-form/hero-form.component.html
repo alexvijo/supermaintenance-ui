@@ -4,7 +4,7 @@
     
     <mat-form-field appearance="fill">
       <mat-label>Alias</mat-label>
-      <input matInput type="text" formControlName="name">
+      <input matInput type="text" formControlName="name" appUpperCase>
       <mat-error *ngIf="heroForm.get('name'); let nameCtrl">
         <div *ngIf="nameCtrl.invalid && nameCtrl.touched">
           <div *ngIf="nameCtrl.errors && nameCtrl.errors['required']">El nombre es obligatorio.</div>
