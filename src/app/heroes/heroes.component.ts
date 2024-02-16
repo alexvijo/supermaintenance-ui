@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { HeroFormComponent } from '../hero-form/hero-form.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
 
 @Component({
   selector: 'app-heroes',
@@ -28,7 +29,7 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
-    this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
@@ -47,20 +48,29 @@ export class HeroesComponent implements OnInit {
   }
 
   editHero(hero: Hero) {
-    this.openDialog(hero);
+    this.openHeroFormDialog(hero);
   }
 
   deleteHero(hero: Hero) {
-    this.heroService.deleteHero(hero.id).subscribe(() => {
-      this.getHeroes();
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '600px',
+      data: { name: hero.name }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.heroService.deleteHero(hero.id).subscribe(() => {
+          this.getHeroes();
+        });
+      }
     });
   }
 
   addHero() {
-    this.openDialog(null);
+    this.openHeroFormDialog(null);
   }
 
-  openDialog(hero: Hero | null): void {
+  openHeroFormDialog(hero: Hero | null): void {
     const dialogRef = this.dialog.open(HeroFormComponent, {
       width: '600px',
       data: {

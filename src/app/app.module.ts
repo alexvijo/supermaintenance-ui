@@ -20,13 +20,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeroFormComponent } from './hero-form/hero-form.component';
 import { LoadingSpinnerComponent } from './loading-spinner-component/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
     HeroFormComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    DeleteConfirmationComponent
   ],
   imports: [
     BrowserModule,
