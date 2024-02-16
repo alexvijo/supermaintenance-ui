@@ -41,9 +41,6 @@ export class HeroFormComponent implements OnInit{
         Validators.required, Validators.minLength(10),
       ]),
     });
-
-    console.log("this.hero: ", this.hero);
-
   }
 
   onSubmit() {
@@ -52,7 +49,6 @@ export class HeroFormComponent implements OnInit{
 
   saveHero() {
     if (this.hero) {
-      console.log("1 saveHero: ",this.hero.id,  this.heroForm.value);
       this.loadingService.setLoading(true);
       this.heroService.updateHero(this.hero.id, this.heroForm.value).subscribe(response => {
         // add timeout to see the spinner
@@ -62,7 +58,6 @@ export class HeroFormComponent implements OnInit{
         }, 1500);
       });
     } else {
-      console.log("2 saveHero: ", this.heroForm.value);
       this.heroService.createHero(this.heroForm.value).subscribe(response => {
         setTimeout(() => {
           this.loadingService.setLoading(false);
