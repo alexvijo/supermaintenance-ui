@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HeroFormComponent } from '../hero-form/hero-form.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-heroes',
@@ -29,7 +30,6 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
-    //this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit() {
@@ -37,7 +37,12 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getAllHeroes().subscribe(heroes => {
+    this.heroService.getAllHeroes().pipe(
+      catchError(error => {
+        console.error('Error occurred: ', error);
+        return of([]);
+      })
+    ).subscribe(heroes => {
       this.dataSource.data = heroes;
     });
   }
@@ -59,7 +64,12 @@ export class HeroesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.heroService.deleteHero(hero.id).subscribe(() => {
+        this.heroService.deleteHero(hero.id).pipe(
+          catchError(error => {
+            console.error('Error occurred: ', error);
+            return of([]);
+          })
+        ).subscribe(() => {
           this.getHeroes();
         });
       }
@@ -78,8 +88,13 @@ export class HeroesComponent implements OnInit {
       }
     });
   
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed',result);
+    dialogRef.afterClosed().pipe(
+      catchError(error => {
+        console.error('Error occurred: ', error);
+        return of([]);
+      })
+    ).subscribe(result => {
+      console.log('The dialog was closed', result);
       this.getHeroes();
     });
   }
