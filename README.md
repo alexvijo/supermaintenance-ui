@@ -12,7 +12,7 @@ npm: v10.2.4
 Para correr la aplicación en localhost, sigue estos pasos:
 1. Ejecuta angular server con
 ```bash
-npm start
+npm run start
 ```
 2. Abrir un browser en localhost sobre el puerto 4200
 [Abrir navegador](http://localhost:4200/)
@@ -22,11 +22,11 @@ npm start
 Para correr la aplicación sobre docker, sigue estos pasos:
 1. Compila la aplicación desde la raiz del proyecto angular
 ```bash
-docker-compose up
+npm run build
 ```
 2. Ejecuta docker-compose
 ```bash
-docker-compose up
+docker-compose up --build
 ```
 3. Abrir un browser en localhost sobre el puerto 8080
 [Abrir navegador](http://localhost:8080/)

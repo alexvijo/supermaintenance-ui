@@ -21,8 +21,8 @@ import { HeroFormComponent } from './hero-form/hero-form.component';
 import { LoadingSpinnerComponent } from './loading-spinner-component/loading-spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
-import { LoadingInterceptor } from './loading.interceptor';
-import { UpperCaseDirective } from './upper-case.directive';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { UpperCaseDirective } from './directives/upper-case.directive';
 
 @NgModule({
   declarations: [

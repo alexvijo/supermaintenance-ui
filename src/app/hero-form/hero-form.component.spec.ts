@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeroFormComponent } from './hero-form.component';
 import { HeroService } from '../services/hero.service';
 import { LoadingService } from '../services/loading-service.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -12,6 +12,14 @@ describe('HeroFormComponent', () => {
   let mockHeroService: any;
   let mockLoadingService;
   let mockDialogRef: any;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ HeroFormComponent ],
+      imports: [ MatDialogModule ]
+    })
+    .compileComponents();
+  });
 
   beforeEach(async () => {
     mockHeroService = jasmine.createSpyObj(['updateHero', 'createHero']);

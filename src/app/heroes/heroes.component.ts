@@ -18,6 +18,7 @@ export class HeroesComponent implements OnInit {
   heroes = [];
   dataSource = new MatTableDataSource<Hero>(this.heroes);
   displayedColumns: string[] = ['name', 'description', 'actions'];
+  noResults = false; // in search
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -50,6 +51,12 @@ export class HeroesComponent implements OnInit {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    //get number of results
+    if (this.dataSource.filteredData.length === 0) {
+      this.noResults = true;
+    } else {
+      this.noResults = false;
+    }
   }
 
   editHero(hero: Hero) {

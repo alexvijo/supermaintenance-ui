@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -34,7 +35,8 @@ describe('HeroesComponent', () => {
                 MatInputModule,
                 MatButtonModule,
                 BrowserAnimationsModule,
-                FlexLayoutModule],
+                FlexLayoutModule,
+                MatDialogModule],
       declarations: [HeroesComponent],
       providers: [{ provide: HeroService, useValue: heroServiceSpy }],
     }).compileComponents();
@@ -87,7 +89,7 @@ describe('HeroesComponent', () => {
   
     component.editHero(hero);
   
-    expect(service.updateHero).toHaveBeenCalledWith(hero);
+    expect(service.updateHero).toHaveBeenCalledWith(hero.id, updatedHero); // Fix the argument to pass both the hero ID and the updated hero object
     expect(component.getHeroes).toHaveBeenCalled();
   });
 
@@ -107,7 +109,7 @@ describe('HeroesComponent', () => {
     spyOn(service, 'createHero').and.returnValue(of(hero)); // Fix the return value to of(undefined)
     spyOn(component, 'getHeroes');
 
-    component.addHero(hero);
+    component.addHero();
 
     expect(service.createHero).toHaveBeenCalledWith(hero);
     expect(component.getHeroes).toHaveBeenCalled();
