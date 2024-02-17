@@ -5,6 +5,10 @@ import { LoadingService } from '../services/loading-service.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('HeroFormComponent', () => {
   let component: HeroFormComponent;
@@ -16,11 +20,17 @@ describe('HeroFormComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ HeroFormComponent ],
-      imports: [ MatDialogModule ]
+      imports: [ 
+        MatDialogModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        MatButtonModule, 
+        ReactiveFormsModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   });
-
   beforeEach(async () => {
     mockHeroService = jasmine.createSpyObj(['updateHero', 'createHero']);
     mockLoadingService = jasmine.createSpyObj(['setLoading']);

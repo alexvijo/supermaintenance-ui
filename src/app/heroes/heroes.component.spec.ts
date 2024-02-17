@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -23,6 +24,14 @@ describe('HeroesComponent', () => {
     { id: 1, name: 'Hero One', description: 'Description One' },
     { id: 2, name: 'Hero Two', description: 'Description Two' },
   ];
+  
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ HeroesComponent ],
+      imports: [ /* tus importaciones aquí */ ]
+    })
+    .compileComponents();
+  });
 
   beforeEach(async () => {
     const heroServiceSpy = jasmine.createSpyObj('HeroService', ['getAllHeroes']);
@@ -36,7 +45,8 @@ describe('HeroesComponent', () => {
                 MatButtonModule,
                 BrowserAnimationsModule,
                 FlexLayoutModule,
-                MatDialogModule],
+                MatDialogModule,
+                MatPaginatorModule],
       declarations: [HeroesComponent],
       providers: [{ provide: HeroService, useValue: heroServiceSpy }],
     }).compileComponents();
@@ -47,17 +57,7 @@ describe('HeroesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeroesComponent);
     component = fixture.componentInstance;
-    getAllHeroesSpy.and.returnValue(of(mockHeroes));
     fixture.detectChanges();
-  });
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [HeroesComponent, HeroService]
-    });
-
-    component = TestBed.inject(HeroesComponent);
-    service = TestBed.inject(HeroService);
   });
 
   it('should create', () => {
